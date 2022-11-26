@@ -1,7 +1,10 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const PORT = 8080;
+const cookieParser = require('cookie-parser');
+
+const PORT = 3000;
+
 const userRouter = require('./routes/userRouter')
 
 
@@ -12,6 +15,7 @@ const userRouter = require('./routes/userRouter')
  */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
     return res.status(200).sendFile(path.join(__dirname, './index.html'));

@@ -2,24 +2,24 @@ const db = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
 userController = {};
-// Test
+
 const SALT_WORK_FACTOR = 10;
 
-userController.verifyLogin = (req, res, next) => {
-  try {
-    const { Username, Password } = req.body;
-    const hashPass = bcrypt.hashSync(Password, SALT_WORK_FACTOR);
-    const text = 'SELECT Email, Password FROM Users WHERE Email = $1 AND Password = $2;'
-    db.query(text, [Username, hashPass])
-      .then(data => {
-        res.locals.data = data;
-      })
+userController.verifyLogin = async (req, res, next) => {
+  const { Email, Password } = req.body;
+  const text = 'SELECT Password, UserID FROM Users WHERE Email = $1'
+  await db.query(text, [Email])
+    .then(data => {
+      res.locals.id = data.rows[0].personid;
+      res.locals.hashPass = data.rows[0].password;
+    })
+  if (bcrypt.compareSync(Password, res.locals.hashPass)) {
     return next();
-  } catch (e) {
+  } else {
     const errorObject = {
       log: 'error in userController.verifyLogin',
       status: 400,
-      message: {err: e}
+      message: {err: 'Wrong username or password'}
     }
     return next(errorObject);
   }
@@ -44,20 +44,22 @@ userController.createUser = (req, res, next) => {
   }
 };
 
+// Update cookie section
 userController.getInfo = (req, res, next) => {
-  const str = `SELECT * FROM Users WHERE PersonID =  ${req.query.id}`;
-  db.query(str, (err, result) => {
-    if(err){
-      const errorObject = {
-        log: 'error in userController get info',
-        status: 400,
-        message: {err: 'Query for user info failed'}
-      }
-      return next(errorObject);
+  try {
+    console.log(req.cookie, 'COOKIE');
+    const { id } = res.locals
+    console.log(id, 'ID')
+    const text = 'SELECT * FROM Users WHERE UserID = $1';
+    db.query(text, [id])
+  } catch {
+    const errorObject = {
+      log: 'error in userController get info',
+      status: 400,
+      message: {err: 'Query for user info failed'}
     }
-    res.locals.userInfo = result.rows;
-    return next();
-  })
+    return next(errorObject);
+  }
 };
 
 module.exports = userController;
