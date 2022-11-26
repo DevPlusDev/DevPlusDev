@@ -2,7 +2,7 @@ const db = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
 userController = {};
-
+// Test
 const SALT_WORK_FACTOR = 10;
 
 userController.verifyLogin = (req, res, next) => {
