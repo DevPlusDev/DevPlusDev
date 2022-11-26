@@ -18,3 +18,4 @@ router.get('/mainpage', userController.getInfo,
   res.status(200).json(res.locals.userInfo);
 })
 
+module.exports = router

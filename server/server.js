@@ -1,9 +1,9 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-
-const PORT = 3000;
+const PORT = 8080;
 const userRouter = require('./routes/userRouter')
+
 
 // Root
 
@@ -27,8 +27,6 @@ app.use(express.static(path.resolve(__dirname, '../client')));
  * define route handlers
  */
 app.use('/', userRouter);
-app.use('/signup', userRouter);
-app.use('/login', userRouter);
 
 // Route handler for any unknown endpoints 
 app.use((req, res) => res.status(404).send("This is not the page you're looking for..."));

@@ -19,20 +19,29 @@ userController.verifyLogin = (req, res, next) => {
     const errorObject = {
       log: 'error in userController.verifyLogin',
       status: 400,
-      message: {err: 'e'}
+      message: {err: e}
     }
     return next(errorObject);
   }
 };
 
 userController.createUser = (req, res, next) => {
-  const { LastName, FirstName, Email, Password, Linkedin, YOE, DevStatus, Languages, CurrentRole, Location } = req.body
-  Password = bcrypt.hashSync(Password, SALT_WORK_FACTOR);
-  const newRow = `INSERT INTO Users (LastName, FirstName, Email, Password, Linkedin, YOE, DevStatus, Languages, CurrentRole, Location) 
-                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`
-  db.query(str, [LastName, FirstName, Email, Password, Linkedin, YOE, DevStatus, Languages, CurrentRole, Location], (err, result) =>{
-    return next();
-  });
+  try {
+    const { LastName, FirstName, Email, Password, Linkedin, YOE, DevStatus, Languages, CurrentRole, Location } = req.body
+    const hashPass = bcrypt.hashSync(Password, SALT_WORK_FACTOR);
+    const text = `INSERT INTO Users (LastName, FirstName, Email, Password, Linkedin, YOE, DevStatus, Languages, CurrentRole, Location) 
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`
+    db.query(text, [LastName, FirstName, Email, hashPass, Linkedin, YOE, DevStatus, Languages, CurrentRole, Location], (err, result) =>{
+      return next();
+    })
+  } catch (e) {
+    const errorObject = {
+      log: 'error in userController.createUser',
+      status: 400,
+      message: {err: e}
+    }
+    return next(errorObject);
+  }
 };
 
 userController.getInfo = (req, res, next) => {
@@ -50,3 +59,5 @@ userController.getInfo = (req, res, next) => {
     return next();
   })
 };
+
+module.exports = userController;
