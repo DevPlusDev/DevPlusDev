@@ -5,17 +5,30 @@ const app = express();
 const PORT = 3000;
 const userRouter = require('./routes/userRouter')
 
-app.use(express.json());
-
 // Root
+
+/**
+ * handle parsing request body
+ */
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.get('/', (req, res) => {
     return res.status(200).sendFile(path.join(__dirname, './index.html'));
 });
 
-// Handle userController middleware functionality
-app.use('/', userRouter);
 
-app.use(express.urlencoded({ extended: true }));
+/**
+ * handle requests for static files
+ */
+app.use(express.static(path.resolve(__dirname, '../client')));
+
+/**
+ * define route handlers
+ */
+app.use('/', userRouter);
+app.use('/signup', userRouter);
+app.use('/login', userRouter);
 
 // Route handler for any unknown endpoints 
 app.use((req, res) => res.status(404).send("This is not the page you're looking for..."));
@@ -37,3 +50,4 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
+
