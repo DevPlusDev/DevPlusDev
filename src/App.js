@@ -25,7 +25,7 @@
 // }
 
 // export default App;
-import React from "react";
+
 import { useState } from "react";
 import { Button } from "@material-ui/core";
 import VideoCall from "./VideoCall";
