@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/userController')
 
 // Changed get to post as we're checking for the user's login information
-router.get('/', userController.verifyLogin,
+router.get('/login', userController.verifyLogin,
 (req, res) => { 
   res.status(200).json('successful login');
 });

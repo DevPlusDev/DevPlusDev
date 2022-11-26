@@ -8,9 +8,9 @@ const SALT_WORK_FACTOR = 10;
 userController.verifyLogin = (req, res, next) => {
   try {
     const { Username, Password } = req.body;
-    Password = bcrypt.hashSync(Password, SALT_WORK_FACTOR);
+    const hashPass = bcrypt.hashSync(Password, SALT_WORK_FACTOR);
     const text = 'SELECT Email, Password FROM Users WHERE Email = $1 AND Password = $2;'
-    db.query(text, [Username, Password])
+    db.query(text, [Username, hashPass])
       .then(data => {
         res.locals.data = data;
       })
