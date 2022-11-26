@@ -1,6 +1,9 @@
+import React from "react";
 import { useState, useEffect } from 'react';
-import { config, useClient, useMicrophoneAndCameraTracks, channelName } from "/settings.js"
-import { Grid } from "@material-ui/core"
+import { config, useClient, useMicrophoneAndCameraTracks, channelName } from "./settings.js";
+import { Grid } from "@material-ui/core";
+import Controls from './Controls.js';
+import Video from './Video.js';
 
 export default function VideoCall(props) {
     const { setInCall } = props;
@@ -76,17 +79,17 @@ export default function VideoCall(props) {
 
     return (
         // Use the MaterialUI grid layout to display.
-        <Grid container direction="column" style={height="100%"}>
+        <Grid container direction="column" style={{ height: "100%" }}>
             {/* Render the controls on screen. */}
-            <Grid> item style={{ height: "5%" }}
+            <Grid item style={{ height: "5%" }}>
                 {/* We should only show controls for our video if our video is enabled and permissions are completed successfully. */}
                 {ready && tracks && (<Controls tracks={tracks} setStart={start} setInCall={setInCall} />
                 )}
             </Grid>
             {/* Render the video panel. */}
-             <Grid> item style={{ height: "95%" }}
+             <Grid item style={{ height: "95%" }}>
                 {/* Start is telling us that we can now view other people's videos even though we may or may not have given permission to our video. */}
-                {start && tracks && (<Videos tracks={tracks} users={users} />
+                {start && tracks && (<Video tracks={tracks} users={users} />
                 )}
             </Grid>
         </Grid>
