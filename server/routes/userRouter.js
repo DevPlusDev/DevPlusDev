@@ -1,9 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const userController = require('../controllers/userController')
 
 
-router.get('/')//add controller shit 
+router.get('/', userController.verifyLogin,
+(req, res) => { 
+  console.log('at end of species');
+  res.status(200).json('successful login');
+});
 
-router.post('/signup')//add controller shit. 
+router.post('/signup', userController.createUser, 
+(req, res) => {
+  res.status(200).json('success');
+});
 
-router.get('/mainpage')//add controller shit 
+router.get('/mainpage', userController.getInfo, 
+(req, res) => {
+  res.status(200).json(res.locals.userInfo);
+})
