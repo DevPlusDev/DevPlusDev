@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function App() {
-    return (
-      <h1>Hello World</h1>  
-    );
+
+  const [inCall, setInCall] = useState(false);
+
+  return (
+    <div className="App">
+      {inCall ? "We are in the call!" : "Waiting to join call!"}
+    </div>
+  );
 }
 
 export default App;
