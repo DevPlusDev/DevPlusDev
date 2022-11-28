@@ -16,34 +16,67 @@ export default function Video(props) {
     // Only do this when the count of users changes or when the audio/video tracks change.
   }, [users, tracks]);
   
-  return (
-    // The Agora Video Player as the parent must have a height otherwise it defaults to 0% and the children containers won't be visible.
-    <Grid container style={{ height: "100%" }}>
-        {/* When the screen is XS then the grid item will take up the number of squares associated with the gridSpacing value from the state. */}
-      <Grid item xs={gridSpacing}>
-        {/* This is the client's video player. */}
-        <AgoraVideoPlayer
-          videoTrack={tracks[1]}
-          style={{ height: "100%", width: "100%" }}
-        />
-      </Grid>
-      {/* To create another video player for each participant in the call from the users state count. */}
-      {users.length > 0 &&
-        users.map((user) => {
-          console.log("USER ADDED:", user);
-          if (user.videoTrack) {
-            return (
-              <Grid item xs={gridSpacing}>
-                <AgoraVideoPlayer
-                  videoTrack={user.videoTrack}
-                  key={user.uid}
-                  style={{ height: "100%", width: "100%" }}
-                />
-              </Grid>
-            );
-            // If we have no users then don't render anything.
-          } else return null;
-        })}
+//   return (
+//     // The Agora Video Player as the parent must have a height otherwise it defaults to 0% and the children containers won't be visible.
+//     <Grid container style={{ height: "100%" }}>
+//         {/* When the screen is XS then the grid item will take up the number of squares associated with the gridSpacing value from the state. */}
+//       <Grid item xs={gridSpacing}>
+//         {/* This is the client's video player. */}
+//         <AgoraVideoPlayer
+//           videoTrack={tracks[1]}
+//           style={{ height: "100%", width: "100%" }}
+//         />
+//       </Grid>
+//       {/* To create another video player for each participant in the call from the users state count. */}
+//       {users.length > 0 &&
+//         users.map((user) => {
+//           console.log("USER ADDED:", user);
+//           if (user.videoTrack) {
+//             return (
+//               <Grid item xs={gridSpacing}>
+//                 <AgoraVideoPlayer
+//                   videoTrack={user.videoTrack}
+//                   key={user.uid}
+//                   style={{ height: "100%", width: "100%" }}
+//                 />
+//               </Grid>
+//             );
+//             // If we have no users then don't render anything.
+//           } else return null;
+//         })}
+//     </Grid>
+//   );
+// }
+
+
+return (
+  // The Agora Video Player as the parent must have a height otherwise it defaults to 0% and the children containers won't be visible.
+  <Grid container style={{ height: "100%" }}>
+      {/* When the screen is XS then the grid item will take up the number of squares associated with the gridSpacing value from the state. */}
+    <Grid item xs={gridSpacing}>
+      {/* This is the client's video player. */}
+      <AgoraVideoPlayer
+        videoTrack={tracks[1]}
+        style={{ height: "100%", width: "100%" }}
+      />
     </Grid>
-  );
+    {/* To create another video player for each participant in the call from the users state count. */}
+    {users.length > 0 &&
+      users.map((user) => {
+        console.log("USER ADDED:", user);
+        if (user.videoTrack) {
+          return (
+            <Grid item xs={gridSpacing}>
+              <AgoraVideoPlayer
+                videoTrack={user.videoTrack}
+                key={user.uid}
+                style={{ height: "100%", width: "100%" }}
+              />
+            </Grid>
+          );
+          // If we have no users then don't render anything.
+        } else return null;
+      })}
+  </Grid>
+);
 }
