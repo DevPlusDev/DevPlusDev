@@ -10,7 +10,6 @@ function LoginPage() {
     if(email && password){
       async function handleSubmit() {
         const data = {Email: email, Password: password}
-        console.log(data, "DATA")
         await fetch('/login', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},

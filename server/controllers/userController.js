@@ -6,18 +6,19 @@ userController = {};
 const SALT_WORK_FACTOR = 10;
 
 userController.verifyLogin = async (req, res, next) => {
-  const { Email, Password } = req.body;
-  const text = 'SELECT Password, UserID FROM Users WHERE Email = $1'
-  await db.query(text, [Email])
-    .then(data => {
-      console.log(data)
-      res.locals.id = data.rows[0].userid;
-      res.locals.hashPass = data.rows[0].password;
-    })
-  if (bcrypt.compareSync(Password, res.locals.hashPass)) {
-    res.locals.verified = true;
-    return next();
-  } else {
+  try {
+    const { Email, Password } = req.body;
+    const text = 'SELECT Password, UserID FROM Users WHERE Email = $1'
+    await db.query(text, [Email])
+      .then(data => {
+        res.locals.id = data.rows[0].userid;
+        res.locals.hashPass = data.rows[0].password;
+      })
+    if (bcrypt.compareSync(Password, res.locals.hashPass)) {
+      res.locals.verified = true;
+      return next();
+    }
+  } catch(e) {
     const errorObject = {
       log: 'error in userController.verifyLogin',
       status: 400,
@@ -50,7 +51,6 @@ userController.createUser = (req, res, next) => {
 userController.getInfo = (req, res, next) => {
   try {
     const { id } = res.locals
-    console.log(id, 'ID')
     const text = 'SELECT * FROM Users WHERE UserID = $1';
     db.query(text, [id])
   } catch {
