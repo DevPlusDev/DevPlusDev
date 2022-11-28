@@ -37,7 +37,7 @@ function Signup(){
     
   return (
     <div className="loginContainer">
-      <form onSubmit={(e)=> {
+      <form className="loginForm" onSubmit={(e)=> {
         e.preventDefault()
         setEmail(e.target[0].value)
         setPassword(e.target[1].value)
@@ -50,27 +50,18 @@ function Signup(){
         setCurrentRole(e.target[8].value)
         setLocation(e.target[9].value)
       }}>
-        <label>Email: </label>
-        <input type="text" name="email"/><br/>
-        <label>Password: </label>
-        <input type="password" name="password"/><br/>
-        <label>First Name:</label>
-        <input type="text" name="FirstName"/><br/>
-        <label>Last Name:</label>
-        <input type="text" name="LastName"/><br/>
-        <label>Linkedin:</label>
-        <input type="text" name="Linkedin"/><br/>
-        <label>YOE:</label>
-        <input type="number" name="YOE"/><br/>
-        <label>DevStatus:</label>
-        <input type="text" name="DevStatus"/><br/>
-        <label>Languages:</label>
-        <input type="text" name="Languages"/><br/>
-        <label>CurrentRole:</label>
-        <input type="text" name="CurrentRole"/><br/>        
-        <label>Location:</label>
-        <input type="text" name="Location"/><br/>
-        <input type="submit" value="Sign Up" />
+        <h2>Sign Up</h2>
+        <input className="loginInput" type="text" name="email" placeholder="Email"/><br/>
+        <input className="loginInput" type="password" name="password" placeholder="Password"/><br/>
+        <input className="loginInput" type="text" name="FirstName" placeholder="First Name"/><br/>
+        <input className="loginInput" type="text" name="LastName" placeholder="Last Name"/><br/>
+        <input className="loginInput" type="text" name="Linkedin" placeholder="LinkedIn"/><br/>
+        <input className="loginInput" type="number" name="YOE" placeholder="Years of Experience"/><br/>
+        <input className="loginInput" type="text" name="DevStatus" placeholder="Dev Status"/><br/>
+        <input className="loginInput" type="text" name="Languages" placeholder="Languages"/><br/>
+        <input className="loginInput" type="text" name="CurrentRole" placeholder="Current Role"/><br/>        
+        <input className="loginInput" type="text" name="Location" placeholder="Location"/><br/>
+        <input className="loginBtn" type="submit" value="Sign Up" />
       </form>
     </div>   
   )

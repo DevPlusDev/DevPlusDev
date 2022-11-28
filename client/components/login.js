@@ -30,22 +30,19 @@ function LoginPage() {
     
   return (
     <div className="loginContainer">
-      <form onSubmit={(e)=> {
+      <div className="loginForm">
+        <img src="../imgs/logo.png" style={{maxHeight: '200px'}} />
+        <form className="formContainer" onSubmit={(e)=> {
         e.preventDefault()
         setEmail(e.target[0].value)
         setPassword(e.target[1].value)
       }}>
-        <label>
-        Email:
-        <input type="text" name="email"/><br/>
-        </label>
-        <label>
-        Password:
-        <input type="password" name="password"/><br/>
-        </label>
-        <input type="submit" value="Login" />
+        <input className="loginInput" type="text" name="email" placeholder="Email"/><br/>
+        <input className="loginInput" type="password" name="password" placeholder="Password"/><br/>
+        <input className="loginBtn" type="submit" value="Login" />
       </form>
-      <button className="Signup"><Link to = '/signup'>Sign Up</Link></button>
+      <button className="loginBtn"><Link style={{textDecoration: "none", color:"white"}}to = '/signup'>Sign Up</Link></button>
+      </div>
     </div>   
   )
 }
