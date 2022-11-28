@@ -29,3 +29,11 @@ code {
   margin: 0 auto;
   border: 2px solid red;
 }
+
+.userDetails {
+  display: flex;
+}
+
+span {
+  font-weight: bold;
+}

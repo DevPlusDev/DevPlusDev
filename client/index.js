@@ -7,7 +7,6 @@ import App from './components/App'
 import LoginPage from './components/login'
 import Signup from "./components/Signup";
 
-
 export default function Start(){
   return(
     <BrowserRouter>
