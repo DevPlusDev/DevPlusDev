@@ -10,7 +10,8 @@ userController.verifyLogin = async (req, res, next) => {
   const text = 'SELECT Password, UserID FROM Users WHERE Email = $1'
   await db.query(text, [Email])
     .then(data => {
-      res.locals.id = data.rows[0].personid;
+      console.log(data)
+      res.locals.id = data.rows[0].userid;
       res.locals.hashPass = data.rows[0].password;
     })
   if (bcrypt.compareSync(Password, res.locals.hashPass)) {
