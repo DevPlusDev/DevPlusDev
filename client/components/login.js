@@ -5,29 +5,30 @@ class LoginPage extends Component {
   constructor(props){
     super(props)
     this.state = {
-      email: null,
-      password: null
+      Email: null,
+      Password: null
     }
     // this.handleSubmit= this.handleSubmit.bind(this)
     this.updateEmail= this.updateEmail.bind(this)
     this.updatePassword= this.updatePassword.bind(this)
+    this.handleSubmit= this.handleSubmit.bind(this)
   }
   updateEmail(event){
-    this.setState({...this.state, username: event.target.value})
+    this.setState({...this.state, Email: event.target.value})
   }
   updatePassword(event){
-    console.log(event.target.value);
-    this.setState({...this.state, password: event.target.value})
+    this.setState({...this.state, Password: event.target.value})
   }
-  handleSubmit(event){
-    console.log('test')
+
+  async handleSubmit(event) {
     event.preventDefault();
-    const data = {email: this.state.email, password: this.state.password}
-    fetch('/login', {
+    const data = {Email: this.state.Email, Password: this.state.Password}
+    console.log(data, "DATA")
+    await fetch('/login', {
       method: 'POST',
-      headers: {'Content-Type': 'Application/JSON'},
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data),
-    }).then((result)=>{
+    }).then(result => {
       console.log(result)
     })
   }
@@ -38,11 +39,11 @@ class LoginPage extends Component {
         <form onSubmit={(e)=>this.handleSubmit(e)}>
           <label>
           Email:
-          <input type="text" name="email" value= {this.email} onChange= {(event) => this.updateEmail(event)}/><br/>
+          <input type="text" name="email" value= {this.Email} onChange= {(event) => this.updateEmail(event)}/><br/>
           </label>
           <label>
           Password:
-          <input type="password" name="password" value= {this.password} onChange= {(event) => this.updatePassword(event)}/><br/>
+          <input type="password" name="password" value= {this.Password} onChange= {(event) => this.updatePassword(event)}/><br/>
           </label>
           <input type="submit" value="Login" />
         </form>
