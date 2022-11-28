@@ -4,17 +4,8 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 function LoginPage() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const [verified, setVerified] = useState(false);
   const navigate = useNavigate();
-  // const updateEmail = ((e) => {
-  //   setEmail(e.target.value)
-  // })
 
-  // const updatePassword = ((e) => {
-  //   setPassword(e.target.value)
-  // })
-
-  // .then(res => res.json())
   useEffect(() => {
     if(email && password){
       async function handleSubmit() {
@@ -55,6 +46,7 @@ function LoginPage() {
         </label>
         <input type="submit" value="Login" />
       </form>
+      <button className="Signup"><Link to = '/signup'>Sign Up</Link></button>
     </div>   
   )
 }
