@@ -13,9 +13,9 @@ module.exports = {
                 directory: path.join(__dirname, 'client'),
                 publicPath: '/'
             }, 
-        // proxy: {
-        //     '/': 'http://localhost:3000'
-        // },
+        proxy: {
+            '/': 'http://localhost:3000'
+        },
         port: 8080
     },
     mode: 'development',

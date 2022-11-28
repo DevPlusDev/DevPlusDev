@@ -14,6 +14,7 @@ userController.verifyLogin = async (req, res, next) => {
       res.locals.hashPass = data.rows[0].password;
     })
   if (bcrypt.compareSync(Password, res.locals.hashPass)) {
+    res.locals.verified = true;
     return next();
   } else {
     const errorObject = {
@@ -47,9 +48,8 @@ userController.createUser = (req, res, next) => {
 // Update cookie section
 userController.getInfo = (req, res, next) => {
   try {
-    // console.log(req.cookie, 'COOKIE');
     const { id } = res.locals
-    // console.log(id, 'ID')
+    console.log(id, 'ID')
     const text = 'SELECT * FROM Users WHERE UserID = $1';
     db.query(text, [id])
   } catch {
