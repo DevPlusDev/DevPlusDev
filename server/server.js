@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const PORT = 8080;
+const PORT = 3000;
 const userRouter = require('./routes/userRouter')
 
 
@@ -13,15 +13,15 @@ const userRouter = require('./routes/userRouter')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-    return res.status(200).sendFile(path.join(__dirname, './index.html'));
-});
-
-
 /**
  * handle requests for static files
  */
+
+// app.use('/signup', express.static(path.join(__dirname, '../scripts/signup.html')))
+// app.use('/mainpage', express.static(path.join(__dirname, '../scripts/mainpage.html')))
 app.use(express.static(path.resolve(__dirname, '../client')));
+
+
 
 /**
  * define route handlers
