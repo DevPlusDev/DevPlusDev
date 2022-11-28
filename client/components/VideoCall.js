@@ -83,7 +83,7 @@ export default function VideoCall(props) {
             {/* Render the controls on screen. */}
             <Grid item style={{ height: "5%" }}>
                 {/* We should only show controls for our video if our video is enabled and permissions are completed successfully. */}
-                {ready && tracks && (<Controls tracks={tracks} setStart={start} setInCall={setInCall} />
+                {ready && tracks && (<Controls tracks={tracks} setStart={setStart} setInCall={setInCall} />
                 )}
             </Grid>
             {/* Render the video panel. */}
