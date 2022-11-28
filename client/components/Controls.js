@@ -47,7 +47,7 @@ export default function Controls(props) {
 
   return (
     // This setups us a grid using MaterialUI with Flexbox under the hood. Three predominant grid items for the controls around video and audio.
-    <Grid container spacing={2} alignItems="center">
+    <Grid container spacing={2} alignItems="center" style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
       <Grid item>
         <Button
           variant="contained"
