@@ -26,7 +26,7 @@ function Signup(){
         })
         .then(data => {
           if (data.status === 200) {
-            navigate('/mainpage')
+            navigate('/')
           } else{
             console.log('Invalid Inputs')
           }
