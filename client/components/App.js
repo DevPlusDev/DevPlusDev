@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App" style={{ height: "100%" }}>
-       {/* A button to enter the video call room. */}
+        {/* A button to enter the video call room. */}
       {inCall ? (
         <VideoCall setInCall={setInCall} />
       ) : (

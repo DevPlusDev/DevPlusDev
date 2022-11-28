@@ -15,7 +15,7 @@ export default function Video(props) {
     setGridSpacing(Math.max(Math.floor(12 / (users.length + 1)), 4));
     // Only do this when the count of users changes or when the audio/video tracks change.
   }, [users, tracks]);
-
+  
   return (
     // The Agora Video Player as the parent must have a height otherwise it defaults to 0% and the children containers won't be visible.
     <Grid container style={{ height: "100%" }}>
@@ -30,6 +30,7 @@ export default function Video(props) {
       {/* To create another video player for each participant in the call from the users state count. */}
       {users.length > 0 &&
         users.map((user) => {
+          console.log("USER ADDED:", user);
           if (user.videoTrack) {
             return (
               <Grid item xs={gridSpacing}>

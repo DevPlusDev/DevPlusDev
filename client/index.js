@@ -6,7 +6,6 @@ import {render} from 'react-dom'
 import App from './components/App'
 import LoginPage from './components/login'
 
-
 export default function Start(){
   return(
     <BrowserRouter>
