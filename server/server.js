@@ -12,6 +12,7 @@ const userRouter = require('./routes/userRouter')
  */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 /**
  * handle requests for static files
