@@ -5,6 +5,7 @@ import "./app.css";
 import {render} from 'react-dom'
 import App from './components/App'
 import LoginPage from './components/login'
+import Signup from "./components/Signup";
 
 
 export default function Start(){
@@ -13,6 +14,7 @@ export default function Start(){
       <Routes>
         <Route path = "/" element = {<LoginPage/>}></Route>
         <Route path = "/mainpage" element = {<App/>}></Route>
+        <Route path = "/signup" element = {<Signup/>}></Route>
       </Routes>
     </BrowserRouter>
   )
