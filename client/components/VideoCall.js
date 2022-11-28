@@ -180,20 +180,45 @@ export default function VideoCall(props) {
   }, [channelName, client, ready, tracks]);
 
   return (
-     // Use the MaterialUI grid layout to display.
-    <Grid container direction="column" style={{ height: "100%" }}>
+
+    <div style={{ height: "100%" }}>
+     {/* // Use the MaterialUI grid layout to display. */}
+    <Grid container direction="column" style={{ height: "75%"}}>
       {/* Render the controls on screen. */}
-      <Grid item style={{ height: "5%" }}>
+      <Grid item style={{ height: "6%"}}>
          {/* We should only show controls for our video if our video is enabled and permissions are completed successfully. */}
         {ready && tracks && (
-          <Controls tracks={tracks} setStart={setStart} setInCall={setInCall} />
+          <Controls tracks={tracks} setStart={setStart} setInCall={setInCall}/>
         )}
       </Grid>
       {/* Render the video panel. */}
-      <Grid item style={{ height: "95%" }}>
+      <Grid item style={{ height: "90%" }}>
+
          {/* Start is telling us that we can now view other people's videos even though we may or may not have given permission to our video. */}
         {start && tracks && <Video tracks={tracks} users={users} />}
       </Grid>
     </Grid>
+
+    <div className="userDetails">
+          <ul style={{ minWidth: "50%" }}>
+            <li><span>First Name:</span> Simon</li>
+            <li><span>Last Name:</span> Grigenas</li>
+            <li><span><a href="https://www.linkedin.com/in/simon-grigenas/">LinkedIn</a></span></li>
+            <li><span>Current Role:</span> Senior Developer @ Apple</li>
+            <li><span>Years of Experience:</span> 1</li>
+            <li><span>Languages:</span> Assembly, C++, Scala, Swift, Haskell, PHP</li>
+            <li><span>Location:</span> British Columbia, Canada</li>
+          </ul>
+           <ul style={{ minWidth: "50%" }}>
+            <li><span>First Name:</span> Christian</li>
+            <li><span>Last Name:</span> Catanese</li>
+            <li><span><a href="https://www.linkedin.com/in/christian-catanese-a32961168/">LinkedIn</a></span></li>
+            <li><span>Current Role:</span> Resident @ Codesmith</li>
+            <li><span>Years of Experience:</span> 2 Months</li>
+            <li><span>Languages:</span> Some Javascript</li>
+            <li><span>Location:</span> Florida, USA</li>
+          </ul>
+    </div>
+    </div>
   );
 }
